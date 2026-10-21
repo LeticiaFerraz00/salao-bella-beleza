@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviços | Salão Bella Beleza</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff7f8;
+            color: #49343b;
+        }
+
+        header {
+            background-color: #7d3049;
+            color: white;
+            padding: 24px 8%;
+        }
+
+        header h1 { margin: 0; }
+
+        main {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 24px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 18px #7d304915;
+        }
+
+        h2 { color: #7d3049; }
+
+        label {
+            display: block;
+            margin: 15px 0 6px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d8bfc7;
+            border-radius: 8px;
+        }
+
+        button {
+            margin-top: 20px;
+            background-color: #7d3049;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 22px;
+            cursor: pointer;
+        }
+
+        button:hover { background-color: #602238; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #f0dce2;
+        }
+
+        a { color: #7d3049; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Salão Bella Beleza</h1>
+        <p>Cadastro de serviços</p>
+    </header>
+
+    <main>
+        <p><a href="/">← Voltar para o início</a></p>
+
+        <section class="card">
+            <h2>Cadastrar serviço</h2>
+
+            <form method="POST">
+                <label for="nome">Nome do serviço</label>
+                <input type="text" id="nome" name="nome"
+                       placeholder="Ex.: Corte feminino" required>
+
+                <label for="preco">Preço (R$)</label>
+                <input type="number" id="preco" name="preco"
+                       min="0" step="0.01" required>
+
+                <label for="duracao">Duração (minutos)</label>
+                <input type="number" id="duracao" name="duracao"
+                       min="1" step="1" required>
+
+                <button type="submit">Cadastrar serviço</button>
+            </form>
+        </section>
+
+        <section class="card">
+            <h2>Serviços cadastrados</h2>
+
+            {% if servicos %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Serviço</th>
+                            <th>Preço</th>
+                            <th>Duração</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for servico in servicos %}
+                        <tr>
+                            <td>{{ servico["nome"] }}</td>
+                            <td>R$ {{ "%.2f"|format(servico["preco"]) }}</td>
+                            <td>{{ servico["duracao"] }} minutos</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Nenhum serviço cadastrado ainda.</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
