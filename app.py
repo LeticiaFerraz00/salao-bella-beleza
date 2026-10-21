@@ -1,7 +1,10 @@
 
 from flask import Flask, render_template
+from database import criar_tabelas
 
 app = Flask(__name__)
+
+criar_tabelas()
 
 
 @app.route("/")
