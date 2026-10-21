@@ -80,7 +80,43 @@
 
 .botao-clientes:hover {
     background-color: #602238;
+
 }  
+ /* Modo de alto contraste */
+body.alto-contraste {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+body.alto-contraste header,
+body.alto-contraste main,
+body.alto-contraste section,
+body.alto-contraste footer,
+body.alto-contraste .aviso {
+    background-color: #000 !important;
+    color: #fff !important;
+    border-color: #ff0 !important;
+}
+
+body.alto-contraste h1,
+body.alto-contraste h2,
+body.alto-contraste p,
+body.alto-contraste strong {
+    color: #fff !important;
+}
+
+body.alto-contraste a,
+body.alto-contraste button {
+    background-color: #ff0 !important;
+    color: #000 !important;
+    border: 2px solid #fff !important;
+}
+
+body.alto-contraste a:focus-visible,
+body.alto-contraste button:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+}
     </style>
 </head>
 
@@ -88,6 +124,10 @@
     <header>
         <h1>Salão Bella Beleza</h1>
         <p>Sistema de gestão de agendamentos</p>
+
+    <button type="button" id="botao-contraste" aria-pressed="false">
+        Ativar alto contraste
+    </button>  
     </header>
 
     <main>
@@ -122,5 +162,28 @@
     <footer>
         Salão Bella Beleza — Organização e cuidado em cada atendimento.
     </footer>
+<script>
+    const botaoContraste = document.getElementById("botao-contraste");
+
+    function atualizarContraste(ativado) {
+        document.body.classList.toggle("alto-contraste", ativado);
+
+        botaoContraste.setAttribute("aria-pressed", String(ativado));
+
+        botaoContraste.textContent = ativado
+            ? "Desativar alto contraste"
+            : "Ativar alto contraste";
+    }
+
+    // Recupera a preferência salva no navegador
+    atualizarContraste(localStorage.getItem("altoContraste") === "true");
+
+    botaoContraste.addEventListener("click", function () {
+        const ativado = !document.body.classList.contains("alto-contraste");
+
+        atualizarContraste(ativado);
+        localStorage.setItem("altoContraste", String(ativado));
+    });
+</script>
 </body>
 </html>

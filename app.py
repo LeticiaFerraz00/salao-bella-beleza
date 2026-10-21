@@ -1,7 +1,7 @@
 
 from flask import Flask, render_template, request, redirect, url_for
 from database import criar_tabelas, conectar
-
+from math import isfinite
 app = Flask(__name__)
 
 criar_tabelas()
@@ -50,13 +50,13 @@ def servicos():
                 preco = float(preco)
                 duracao = int(duracao)
 
-                if preco >= 0 and duracao > 0:
+                if isfinite(preco) and preco >= 0 and duracao > 0:
                     conexao.execute(
                         "INSERT INTO servicos (nome, preco, duracao) VALUES (?, ?, ?)",
                         (nome, preco, duracao)
                     )
                     conexao.commit()
-            except ValueError:
+            except (ValueError, OverflowError):
                 pass
 
         conexao.close()
