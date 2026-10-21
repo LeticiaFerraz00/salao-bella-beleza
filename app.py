@@ -1,8 +1,10 @@
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from database import criar_tabelas, conectar
 from math import isfinite
+import os
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY", "chave-local-desenvolvimento")
 
 criar_tabelas()
 
@@ -25,6 +27,7 @@ def clientes():
                 (nome, telefone)
             )
             conexao.commit()
+            flash("Cliente cadastrado com sucesso!", "sucesso")
 
         conexao.close()
         return redirect(url_for("clientes"))
@@ -56,6 +59,7 @@ def servicos():
                         (nome, preco, duracao)
                     )
                     conexao.commit()
+                    flash("Serviço cadastrado com sucesso!", "sucesso")
             except (ValueError, OverflowError):
                 pass
 
