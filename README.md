@@ -279,7 +279,7 @@ Embora o MVP tenha demonstrado potencial para facilitar a organização dos regi
 
 ## 👩‍💻 Autoria
 
-**Leticia de Oliveira Ferraz**
+**Leticia Ferraz**
 
 Curso de graduação — Disciplina de Projeto de Software
 
